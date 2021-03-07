@@ -15,7 +15,12 @@ class CategoryMealsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(categoryTitle),
       ),
-      body: Text("Hello World"),
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          return Container();
+        },
+        itemCount: 3,
+      ),
     );
   }
 }
