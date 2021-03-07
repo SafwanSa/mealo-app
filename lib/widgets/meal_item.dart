@@ -29,6 +29,19 @@ class MealItem extends StatelessWidget {
     }
   }
 
+  String get affordabilityText {
+    switch (affordability) {
+      case Affordability.Affordable:
+        return 'Affordable';
+      case Affordability.Pricey:
+        return 'Pricey';
+      case Affordability.Luxurious:
+        return 'Luxurious';
+      default:
+        return 'Unknown';
+    }
+  }
+
   void _selectMeal() {}
 
   @override
@@ -91,7 +104,7 @@ class MealItem extends StatelessWidget {
                       SizedBox(
                         width: 6,
                       ),
-                      Text('${duration} min')
+                      Text('$duration min')
                     ],
                   ),
                   Row(
@@ -101,6 +114,15 @@ class MealItem extends StatelessWidget {
                         width: 6,
                       ),
                       Text(complexityText)
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.attach_money),
+                      SizedBox(
+                        width: 6,
+                      ),
+                      Text(affordabilityText)
                     ],
                   )
                 ],
