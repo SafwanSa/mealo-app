@@ -8,20 +8,20 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  final List<Map<String, Object>> _pages = [
-    {'page': CategoriesScreen(), 'title': 'Categories'},
-    {'page': FavoriteScreen(), 'title': 'Your Favorite'},
-  ];
-
-  int _selectedPageIndex = 0;
-
-  void _selectPage(int index) {
-    setState(() {
-      _selectedPageIndex = index;
-    });
-  }
-
   Widget _buildBottomTabBar(BuildContext context) {
+    final List<Map<String, Object>> _pages = [
+      {'page': CategoriesScreen(), 'title': 'Categories'},
+      {'page': FavoriteScreen(), 'title': 'Your Favorite'},
+    ];
+
+    int _selectedPageIndex = 0;
+
+    void _selectPage(int index) {
+      setState(() {
+        _selectedPageIndex = index;
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(_pages[_selectedPageIndex]['title']),
