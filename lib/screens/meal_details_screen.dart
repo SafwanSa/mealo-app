@@ -9,16 +9,25 @@ class MealDetailsScreen extends StatelessWidget {
     final routeArgs =
         ModalRoute.of(context).settings.arguments as Map<String, String>;
 
-    final meal = DUMMY_MEALS.where((meal) {
+    final meal = DUMMY_MEALS.firstWhere((meal) {
       return meal.id == routeArgs['id'];
-    }).toList()[0];
+    });
 
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
       ),
-      body: Container(
-        child: Text("Meal"),
+      body: Column(
+        children: [
+          Container(
+            height: 300,
+            width: double.infinity,
+            child: Image.network(
+              meal.imageUrl,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ],
       ),
     );
   }
