@@ -4,22 +4,38 @@ import '../dummy_data.dart';
 
 import '../models/meal.dart';
 
-class CategoryMealsScreen extends StatelessWidget {
+class CategoryMealsScreen extends StatefulWidget {
   static const routeName = "/category-meals";
-  // final String categoryId;
-  // final String categoryTitle;
-  // CategoryMealsScreen({this.categoryId, this.categoryTitle});
+
+  @override
+  _CategoryMealsScreenState createState() => _CategoryMealsScreenState();
+}
+
+class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
+  String categoryTitle;
+  String categoryId;
+  List<Meal> categoryMeals;
+
+  @override
+  void didChangeDependencies() {
+    final routeArgs =
+        ModalRoute.of(context).settings.arguments as Map<String, String>;
+    categoryTitle = routeArgs['title'];
+    categoryId = routeArgs['id'];
+    categoryMeals = DUMMY_MEALS.where((meal) {
+      return meal.categories.contains(categoryId);
+    }).toList();
+    super.didChangeDependencies();
+  }
+
+  void _removeMeal(Meal meal) {
+    setState(() {
+      categoryMeals.remove(meal);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final routeArgs =
-        ModalRoute.of(context).settings.arguments as Map<String, String>;
-    final categoryTitle = routeArgs['title'];
-    final categoryId = routeArgs['id'];
-    final List<Meal> categoryMeals = DUMMY_MEALS.where((meal) {
-      return meal.categories.contains(categoryId);
-    }).toList();
-
     return Scaffold(
       appBar: AppBar(
         title: Text(categoryTitle),
@@ -34,6 +50,7 @@ class CategoryMealsScreen extends StatelessWidget {
               affordability: categoryMeals[index].affordability,
               complexity: categoryMeals[index].complexity,
               duration: categoryMeals[index].duration,
+              removeItem: _removeMeal,
             ),
           );
         },
