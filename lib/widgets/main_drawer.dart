@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/filters_screen.dart';
 
 class MainDrawer extends StatelessWidget {
   Widget _buildListTile({String title, IconData icon, Function tabHandler}) {
@@ -50,7 +51,9 @@ class MainDrawer extends StatelessWidget {
           _buildListTile(
             title: 'Filters',
             icon: Icons.settings,
-            tabHandler: () => {},
+            tabHandler: () {
+              Navigator.of(context).pushNamed(FiltersScreen.routeName);
+            },
           ),
         ],
       ),

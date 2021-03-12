@@ -6,7 +6,12 @@ class FiltersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("Filters Screen"),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Filters Screen'),
+        ),
+        body: Text("Filters Screen"),
+      ),
     );
   }
 }
