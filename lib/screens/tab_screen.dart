@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mealo/models/meal.dart';
 import '../widgets/main_drawer.dart';
 import './favorite_screen.dart';
 import './categories_screen.dart';
 
 class TabsScreen extends StatefulWidget {
+  final List<Meal> favoriteMeals;
+
+  TabsScreen({this.favoriteMeals});
+
   @override
   _TabsScreenState createState() => _TabsScreenState();
 }
@@ -13,7 +18,10 @@ class _TabsScreenState extends State<TabsScreen> {
   Widget _buildBottomTabBar(BuildContext context) {
     final List<Map<String, Object>> _pages = [
       {'page': CategoriesScreen(), 'title': 'Categories'},
-      {'page': FavoriteScreen(), 'title': 'Your Favorite'},
+      {
+        'page': FavoriteScreen(favoriteMeals: widget.favoriteMeals),
+        'title': 'Your Favorite'
+      },
     ];
 
     void _selectPage(int index) {
