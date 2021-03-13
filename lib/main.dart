@@ -27,6 +27,17 @@ class _MyAppState extends State<MyApp> {
   List<Meal> _availableMeals = DUMMY_MEALS;
   List<Meal> _favoriteMeals = [];
 
+  void _toggleFavorite(String mealId) {
+    final existedMeal = _favoriteMeals.indexWhere((meal) => meal.id == mealId);
+    setState(() {
+      if (existedMeal >= 0) {
+        _favoriteMeals.removeAt(existedMeal);
+      } else {
+        _favoriteMeals.add(DUMMY_MEALS.firstWhere((meal) => meal.id == mealId));
+      }
+    });
+  }
+
   void _setFilters(Map<String, bool> filterData) {
     setState(() {
       filters = filterData;
