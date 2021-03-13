@@ -38,6 +38,10 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  bool _isMealFavorite(String mealId) {
+    return _favoriteMeals.any((meal) => meal.id == mealId);
+  }
+
   void _setFilters(Map<String, bool> filterData) {
     setState(() {
       filters = filterData;
@@ -89,7 +93,10 @@ class _MyAppState extends State<MyApp> {
         CategoryMealsScreen.routeName: (_) => CategoryMealsScreen(
               availableMeals: _availableMeals,
             ),
-        MealDetailsScreen.routeName: (_) => MealDetailsScreen(),
+        MealDetailsScreen.routeName: (_) => MealDetailsScreen(
+              toggleFavorite: _toggleFavorite,
+              isFavoriteMeal: _isMealFavorite,
+            ),
         FiltersScreen.routeName: (_) => FiltersScreen(
               currentFilters: filters,
               setFilters: _setFilters,

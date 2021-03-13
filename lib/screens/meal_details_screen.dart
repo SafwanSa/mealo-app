@@ -5,6 +5,11 @@ import 'package:mealo/models/meal.dart';
 class MealDetailsScreen extends StatelessWidget {
   static String routeName = '/meal-details';
 
+  final Function toggleFavorite;
+  final Function isFavoriteMeal;
+
+  MealDetailsScreen({this.toggleFavorite, this.isFavoriteMeal});
+
   Widget _buildSectionTitle({BuildContext context, String text}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -93,10 +98,10 @@ class MealDetailsScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete),
-        onPressed: () {
-          Navigator.of(context).pop(meal);
-        },
+        child: Icon(
+          isFavoriteMeal(meal.id) ? Icons.star : Icons.star_border,
+        ),
+        onPressed: () => toggleFavorite(meal.id),
       ),
     );
   }
